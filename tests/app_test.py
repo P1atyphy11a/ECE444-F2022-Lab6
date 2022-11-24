@@ -20,7 +20,6 @@ def client():
     db.drop_all()  # teardown
 
 
-
 def login(client, username, password):
     """Login helper function"""
     return client.post(
@@ -76,6 +75,7 @@ def test_messages(client):
     assert b"&lt;Hello&gt;" in rv.data
     assert b"<strong>HTML</strong> allowed here" in rv.data
 
+
 def test_delete_message(client):
     """Ensure the messages are being deleted"""
     rv = client.get("/delete/1")
@@ -86,9 +86,11 @@ def test_delete_message(client):
     data = json.loads(rv.data)
     assert data["status"] == 1
 
+
 def test_search(client):
     rv = client.get("/search/")
     assert rv
+
 
 def test_login_required(client):
     rv = client.post("/delete/1")
